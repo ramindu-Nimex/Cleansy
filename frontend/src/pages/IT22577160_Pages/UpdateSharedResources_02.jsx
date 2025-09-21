@@ -51,10 +51,10 @@ const UpdateSharedResources_02 = () => {
 
    const handleUploadImage = async () => {
       try {
-         if(!file) {
-            setImageUploadError('Please select an image');
-            return;
-         }
+         // if(!file) {
+         //    setImageUploadError('Please select an image');
+         //    return;
+         // }
          setImageUploadError(null);
          const storage = getStorage(app)
          const fileName = new Date().getTime() + "-" + file.name;

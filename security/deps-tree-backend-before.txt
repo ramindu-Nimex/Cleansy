@@ -1,0 +1,441 @@
+cleansy@1.0.0 /Users/pradicksha/Documents/SLIIT/Y4S1/SSD/Assignment_01/Cleansy
+├── @stripe/stripe-js@3.3.0
+├── bcryptjs@2.4.3
+├─┬ cookie-parser@1.4.6
+│ ├── cookie-signature@1.0.6
+│ └── cookie@0.4.1
+├─┬ cors@2.8.5
+│ ├── object-assign@4.1.1
+│ └── vary@1.1.2
+├── dotenv@16.4.5
+├─┬ express@4.21.2
+│ ├─┬ accepts@1.3.8
+│ │ ├─┬ mime-types@2.1.35
+│ │ │ └── mime-db@1.52.0
+│ │ └── negotiator@0.6.3
+│ ├── array-flatten@1.1.1
+│ ├─┬ body-parser@1.20.3
+│ │ ├── bytes@3.1.2
+│ │ ├── content-type@1.0.5 deduped
+│ │ ├── debug@2.6.9 deduped
+│ │ ├── depd@2.0.0 deduped
+│ │ ├── destroy@1.2.0
+│ │ ├── http-errors@2.0.0 deduped
+│ │ ├─┬ iconv-lite@0.4.24
+│ │ │ └── safer-buffer@2.1.2
+│ │ ├── on-finished@2.4.1 deduped
+│ │ ├── qs@6.13.0 deduped
+│ │ ├─┬ raw-body@2.5.2
+│ │ │ ├── bytes@3.1.2 deduped
+│ │ │ ├── http-errors@2.0.0 deduped
+│ │ │ ├── iconv-lite@0.4.24 deduped
+│ │ │ └── unpipe@1.0.0 deduped
+│ │ ├── type-is@1.6.18 deduped
+│ │ └── unpipe@1.0.0
+│ ├─┬ content-disposition@0.5.4
+│ │ └── safe-buffer@5.2.1 deduped
+│ ├── content-type@1.0.5
+│ ├── cookie-signature@1.0.6 deduped
+│ ├── cookie@0.7.1
+│ ├─┬ debug@2.6.9
+│ │ └── ms@2.0.0
+│ ├── depd@2.0.0
+│ ├── encodeurl@2.0.0
+│ ├── escape-html@1.0.3
+│ ├── etag@1.8.1
+│ ├─┬ finalhandler@1.3.1
+│ │ ├── debug@2.6.9 deduped
+│ │ ├── encodeurl@2.0.0 deduped
+│ │ ├── escape-html@1.0.3 deduped
+│ │ ├── on-finished@2.4.1 deduped
+│ │ ├── parseurl@1.3.3 deduped
+│ │ ├── statuses@2.0.1 deduped
+│ │ └── unpipe@1.0.0 deduped
+│ ├── fresh@0.5.2
+│ ├─┬ http-errors@2.0.0
+│ │ ├── depd@2.0.0 deduped
+│ │ ├── inherits@2.0.4
+│ │ ├── setprototypeof@1.2.0 deduped
+│ │ ├── statuses@2.0.1 deduped
+│ │ └── toidentifier@1.0.1
+│ ├── merge-descriptors@1.0.3
+│ ├── methods@1.1.2
+│ ├─┬ on-finished@2.4.1
+│ │ └── ee-first@1.1.1
+│ ├── parseurl@1.3.3
+│ ├── path-to-regexp@0.1.12
+│ ├─┬ proxy-addr@2.0.7
+│ │ ├── forwarded@0.2.0
+│ │ └── ipaddr.js@1.9.1
+│ ├─┬ qs@6.13.0
+│ │ └─┬ side-channel@1.0.6
+│ │   ├── call-bind@1.0.7
+│ │   ├── es-errors@1.3.0
+│ │   ├── get-intrinsic@1.2.4
+│ │   └── object-inspect@1.13.1
+│ ├── range-parser@1.2.1
+│ ├── safe-buffer@5.2.1
+│ ├─┬ send@0.19.0
+│ │ ├── debug@2.6.9 deduped
+│ │ ├── depd@2.0.0 deduped
+│ │ ├── destroy@1.2.0 deduped
+│ │ ├── encodeurl@1.0.2
+│ │ ├── escape-html@1.0.3 deduped
+│ │ ├── etag@1.8.1 deduped
+│ │ ├── fresh@0.5.2 deduped
+│ │ ├── http-errors@2.0.0 deduped
+│ │ ├── mime@1.6.0
+│ │ ├── ms@2.1.3
+│ │ ├── on-finished@2.4.1 deduped
+│ │ ├── range-parser@1.2.1 deduped
+│ │ └── statuses@2.0.1 deduped
+│ ├─┬ serve-static@1.16.2
+│ │ ├── encodeurl@2.0.0 deduped
+│ │ ├── escape-html@1.0.3 deduped
+│ │ ├── parseurl@1.3.3 deduped
+│ │ └── send@0.19.0 deduped
+│ ├── setprototypeof@1.2.0
+│ ├── statuses@2.0.1
+│ ├─┬ type-is@1.6.18
+│ │ ├── media-typer@0.3.0
+│ │ └── mime-types@2.1.35 deduped
+│ ├── utils-merge@1.0.1
+│ └── vary@1.1.2 deduped
+├─┬ face-api.js@0.22.2
+│ ├─┬ @tensorflow/tfjs-core@1.7.0
+│ │ ├── @types/offscreencanvas@2019.3.0
+│ │ ├── @types/seedrandom@2.4.27
+│ │ ├── @types/webgl-ext@0.0.30
+│ │ ├── @types/webgl2@0.0.4
+│ │ ├── node-fetch@2.1.2
+│ │ └── seedrandom@2.4.3
+│ └── tslib@1.14.1
+├─┬ firebase-admin@12.1.0
+│ ├── @fastify/busboy@2.1.1
+│ ├─┬ @firebase/database-compat@1.0.4
+│ │ ├─┬ @firebase/component@0.6.6
+│ │ │ ├── @firebase/util@1.9.5 deduped
+│ │ │ └── tslib@2.6.2
+│ │ ├── @firebase/database-types@1.0.2 deduped
+│ │ ├─┬ @firebase/database@1.0.4
+│ │ │ ├── @firebase/app-check-interop-types@0.3.1
+│ │ │ ├── @firebase/auth-interop-types@0.2.2
+│ │ │ ├── @firebase/component@0.6.6 deduped
+│ │ │ ├── @firebase/logger@0.4.1 deduped
+│ │ │ ├── @firebase/util@1.9.5 deduped
+│ │ │ ├── faye-websocket@0.11.4
+│ │ │ └── tslib@2.6.2
+│ │ ├─┬ @firebase/logger@0.4.1
+│ │ │ └── tslib@2.6.2
+│ │ ├─┬ @firebase/util@1.9.5
+│ │ │ └── tslib@2.6.2
+│ │ └── tslib@2.6.2
+│ ├─┬ @firebase/database-types@1.0.2
+│ │ ├── @firebase/app-types@0.9.1
+│ │ └── @firebase/util@1.9.5 deduped
+│ ├─┬ @google-cloud/firestore@7.6.0
+│ │ ├── fast-deep-equal@3.1.3
+│ │ ├── functional-red-black-tree@1.0.1
+│ │ ├─┬ google-gax@4.3.2
+│ │ │ ├── @grpc/grpc-js@1.10.7
+│ │ │ ├── @grpc/proto-loader@0.7.13
+│ │ │ ├── @types/long@4.0.2
+│ │ │ ├── abort-controller@3.0.0 deduped
+│ │ │ ├── duplexify@4.1.3 deduped
+│ │ │ ├── google-auth-library@9.9.0 deduped
+│ │ │ ├── node-fetch@2.7.0
+│ │ │ ├── object-hash@3.0.0 deduped
+│ │ │ ├── proto3-json-serializer@2.0.1
+│ │ │ ├── protobufjs@7.2.6 deduped
+│ │ │ ├── retry-request@7.0.2 deduped
+│ │ │ └── uuid@9.0.1 deduped
+│ │ └─┬ protobufjs@7.2.6
+│ │   ├── @protobufjs/aspromise@1.1.2
+│ │   ├── @protobufjs/base64@1.1.2
+│ │   ├── @protobufjs/codegen@2.0.4
+│ │   ├── @protobufjs/eventemitter@1.1.0
+│ │   ├── @protobufjs/fetch@1.1.0
+│ │   ├── @protobufjs/float@1.0.2
+│ │   ├── @protobufjs/inquire@1.1.0
+│ │   ├── @protobufjs/path@1.1.2
+│ │   ├── @protobufjs/pool@1.1.0
+│ │   ├── @protobufjs/utf8@1.1.0
+│ │   ├── @types/node@20.12.7 deduped
+│ │   └── long@5.2.3 deduped
+│ ├─┬ @google-cloud/storage@7.10.2
+│ │ ├─┬ @google-cloud/paginator@5.0.0
+│ │ │ ├── arrify@2.0.1
+│ │ │ └── extend@3.0.2
+│ │ ├── @google-cloud/projectify@4.0.0
+│ │ ├── @google-cloud/promisify@4.0.0
+│ │ ├─┬ abort-controller@3.0.0
+│ │ │ └── event-target-shim@5.0.1
+│ │ ├─┬ async-retry@1.3.3
+│ │ │ └── retry@0.13.1
+│ │ ├─┬ duplexify@4.1.3
+│ │ │ ├── end-of-stream@1.4.4
+│ │ │ ├── inherits@2.0.4 deduped
+│ │ │ ├── readable-stream@3.6.2
+│ │ │ └── stream-shift@1.0.3
+│ │ ├── ent@2.2.0
+│ │ ├─┬ fast-xml-parser@4.3.6
+│ │ │ └── strnum@1.0.5
+│ │ ├─┬ gaxios@6.5.0
+│ │ │ ├── extend@3.0.2 deduped
+│ │ │ ├── https-proxy-agent@7.0.4
+│ │ │ ├── is-stream@2.0.1
+│ │ │ ├── node-fetch@2.7.0
+│ │ │ └── uuid@9.0.1 deduped
+│ │ ├─┬ google-auth-library@9.9.0
+│ │ │ ├── base64-js@1.5.1
+│ │ │ ├── ecdsa-sig-formatter@1.0.11
+│ │ │ ├── gaxios@6.5.0 deduped
+│ │ │ ├── gcp-metadata@6.1.0
+│ │ │ ├── gtoken@7.1.0
+│ │ │ └── jws@4.0.0
+│ │ ├── mime@3.0.0
+│ │ ├─┬ p-limit@3.1.0
+│ │ │ └── yocto-queue@0.1.0
+│ │ ├─┬ retry-request@7.0.2
+│ │ │ ├── @types/request@2.48.12
+│ │ │ ├── extend@3.0.2 deduped
+│ │ │ └── teeny-request@9.0.0 deduped
+│ │ ├─┬ teeny-request@9.0.0
+│ │ │ ├── http-proxy-agent@5.0.0
+│ │ │ ├── https-proxy-agent@5.0.1
+│ │ │ ├── node-fetch@2.7.0
+│ │ │ ├── stream-events@1.0.5
+│ │ │ └── uuid@9.0.1 deduped
+│ │ └── uuid@8.3.2
+│ ├─┬ @types/node@20.12.7
+│ │ └── undici-types@5.26.5
+│ ├─┬ farmhash@3.3.1
+│ │ ├── node-addon-api@5.1.0
+│ │ └─┬ prebuild-install@7.1.2
+│ │   ├── detect-libc@2.0.3
+│ │   ├── expand-template@2.0.3
+│ │   ├── github-from-package@0.0.0
+│ │   ├── minimist@1.2.8
+│ │   ├── mkdirp-classic@0.5.3
+│ │   ├── napi-build-utils@1.0.2
+│ │   ├── node-abi@3.62.0
+│ │   ├── pump@3.0.0
+│ │   ├── rc@1.2.8
+│ │   ├── simple-get@4.0.1
+│ │   ├── tar-fs@2.1.1
+│ │   └── tunnel-agent@0.6.0
+│ ├── jsonwebtoken@9.0.2 deduped
+│ ├─┬ jwks-rsa@3.1.0
+│ │ ├─┬ @types/express@4.17.21
+│ │ │ ├── @types/body-parser@1.19.5
+│ │ │ ├── @types/express-serve-static-core@4.19.0
+│ │ │ ├── @types/qs@6.9.15
+│ │ │ └── @types/serve-static@1.15.7
+│ │ ├─┬ @types/jsonwebtoken@9.0.6
+│ │ │ └── @types/node@20.12.7 deduped
+│ │ ├─┬ debug@4.3.4
+│ │ │ └── ms@2.1.2
+│ │ ├── jose@4.15.5
+│ │ ├── limiter@1.1.5
+│ │ └─┬ lru-memoizer@2.2.0
+│ │   ├── lodash.clonedeep@4.5.0
+│ │   └── lru-cache@4.0.2
+│ ├── long@5.2.3
+│ ├── node-forge@1.3.1
+│ └── uuid@9.0.1
+├─┬ flowbite-react@0.7.8
+│ ├─┬ @floating-ui/core@1.6.0
+│ │ └── @floating-ui/utils@0.2.1
+│ ├─┬ @floating-ui/react@0.26.10
+│ │ ├─┬ @floating-ui/react-dom@2.0.8
+│ │ │ ├── @floating-ui/dom@1.6.3
+│ │ │ ├── react-dom@18.2.0 deduped
+│ │ │ └── react@18.2.0 deduped
+│ │ ├── @floating-ui/utils@0.2.1 deduped
+│ │ ├── react-dom@18.2.0 deduped
+│ │ ├── react@18.2.0 deduped
+│ │ └── tabbable@6.2.0
+│ ├── classnames@2.5.1
+│ ├── debounce@2.0.0
+│ ├─┬ flowbite@2.3.0
+│ │ ├── @popperjs/core@2.11.8
+│ │ └── mini-svg-data-uri@1.4.4
+│ ├─┬ react-dom@18.2.0
+│ │ ├─┬ loose-envify@1.4.0
+│ │ │ └── js-tokens@4.0.0
+│ │ ├── react@18.2.0 deduped
+│ │ └─┬ scheduler@0.23.0
+│ │   └── loose-envify@1.4.0 deduped
+│ ├─┬ react-icons@5.0.1
+│ │ └── react@18.2.0 deduped
+│ ├─┬ react@18.2.0
+│ │ └── loose-envify@1.4.0 deduped
+│ ├─┬ tailwind-merge@2.2.2
+│ │ └─┬ @babel/runtime@7.24.4
+│ │   └── regenerator-runtime@0.14.1
+│ └─┬ tailwindcss@3.4.3
+│   ├── @alloc/quick-lru@5.2.0
+│   ├── arg@5.0.2
+│   ├── chokidar@3.6.0 deduped
+│   ├── didyoumean@1.2.2
+│   ├── dlv@1.1.3
+│   ├─┬ fast-glob@3.3.2
+│   │ ├── @nodelib/fs.stat@2.0.5
+│   │ ├── @nodelib/fs.walk@1.2.8
+│   │ ├── glob-parent@5.1.2 deduped
+│   │ ├── merge2@1.4.1
+│   │ └── micromatch@4.0.5 deduped
+│   ├─┬ glob-parent@6.0.2
+│   │ └── is-glob@4.0.3 deduped
+│   ├─┬ is-glob@4.0.3
+│   │ └── is-extglob@2.1.1
+│   ├── jiti@1.21.0
+│   ├── lilconfig@2.1.0
+│   ├─┬ micromatch@4.0.5
+│   │ ├── braces@3.0.2 deduped
+│   │ └── picomatch@2.3.1
+│   ├── normalize-path@3.0.0
+│   ├── object-hash@3.0.0
+│   ├── picocolors@1.0.0
+│   ├─┬ postcss-import@15.1.0
+│   │ ├── postcss-value-parser@4.2.0
+│   │ ├── postcss@8.4.38 deduped
+│   │ ├── read-cache@1.0.0
+│   │ └── resolve@1.22.8 deduped
+│   ├─┬ postcss-js@4.0.1
+│   │ ├── camelcase-css@2.0.1
+│   │ └── postcss@8.4.38 deduped
+│   ├─┬ postcss-load-config@4.0.2
+│   │ ├── lilconfig@3.1.1
+│   │ ├── postcss@8.4.38 deduped
+│   │ ├── UNMET OPTIONAL DEPENDENCY ts-node@>=9.0.0
+│   │ └── yaml@2.4.1
+│   ├─┬ postcss-nested@6.0.1
+│   │ ├── postcss-selector-parser@6.0.16 deduped
+│   │ └── postcss@8.4.38 deduped
+│   ├─┬ postcss-selector-parser@6.0.16
+│   │ ├── cssesc@3.0.0
+│   │ └── util-deprecate@1.0.2
+│   ├─┬ postcss@8.4.38
+│   │ ├── nanoid@3.3.7
+│   │ ├── picocolors@1.0.0 deduped
+│   │ └── source-map-js@1.2.0
+│   ├─┬ resolve@1.22.8
+│   │ ├── is-core-module@2.13.1
+│   │ ├── path-parse@1.0.7
+│   │ └── supports-preserve-symlinks-flag@1.0.0
+│   └─┬ sucrase@3.35.0
+│     ├── @jridgewell/gen-mapping@0.3.5
+│     ├── commander@4.1.1
+│     ├── glob@10.3.12
+│     ├── lines-and-columns@1.2.4
+│     ├── mz@2.7.0
+│     ├── pirates@4.0.6
+│     └── ts-interface-checker@0.1.13
+├─┬ jsonwebtoken@9.0.2
+│ ├─┬ jws@3.2.2
+│ │ ├─┬ jwa@1.4.1
+│ │ │ ├── buffer-equal-constant-time@1.0.1
+│ │ │ ├── ecdsa-sig-formatter@1.0.11 deduped
+│ │ │ └── safe-buffer@5.2.1 deduped
+│ │ └── safe-buffer@5.2.1 deduped
+│ ├── lodash.includes@4.3.0
+│ ├── lodash.isboolean@3.0.3
+│ ├── lodash.isinteger@4.0.4
+│ ├── lodash.isnumber@3.0.3
+│ ├── lodash.isplainobject@4.0.6
+│ ├── lodash.isstring@4.0.1
+│ ├── lodash.once@4.1.1
+│ ├── ms@2.1.3
+│ └─┬ semver@7.6.0
+│   └─┬ lru-cache@6.0.0
+│     └── yallist@4.0.0
+├─┬ mongoose@8.3.1
+│ ├── bson@6.6.0
+│ ├── kareem@2.6.3
+│ ├─┬ mongodb@6.5.0
+│ │ ├── UNMET OPTIONAL DEPENDENCY @aws-sdk/credential-providers@^3.188.0
+│ │ ├─┬ @mongodb-js/saslprep@1.1.5
+│ │ │ └── sparse-bitfield@3.0.3
+│ │ ├── UNMET OPTIONAL DEPENDENCY @mongodb-js/zstd@^1.1.0
+│ │ ├── bson@6.6.0 deduped
+│ │ ├── UNMET OPTIONAL DEPENDENCY gcp-metadata@^5.2.0
+│ │ ├── UNMET OPTIONAL DEPENDENCY kerberos@^2.0.1
+│ │ ├── UNMET OPTIONAL DEPENDENCY mongodb-client-encryption@>=6.0.0 <7
+│ │ ├─┬ mongodb-connection-string-url@3.0.0
+│ │ │ ├── @types/whatwg-url@11.0.4
+│ │ │ └── whatwg-url@13.0.0
+│ │ ├── UNMET OPTIONAL DEPENDENCY snappy@^7.2.2
+│ │ └── UNMET OPTIONAL DEPENDENCY socks@^2.7.1
+│ ├── mpath@0.9.0
+│ ├─┬ mquery@5.0.0
+│ │ └─┬ debug@4.3.4
+│ │   └── ms@2.1.2
+│ ├── ms@2.1.3
+│ └── sift@16.0.1
+├── nodemailer@6.9.13
+├─┬ nodeman@1.1.2
+│ └── colors@1.4.0
+├─┬ nodemon@3.1.0
+│ ├─┬ chokidar@3.6.0
+│ │ ├─┬ anymatch@3.1.3
+│ │ │ ├── normalize-path@3.0.0 deduped
+│ │ │ └── picomatch@2.3.1 deduped
+│ │ ├─┬ braces@3.0.2
+│ │ │ └── fill-range@7.0.1
+│ │ ├── fsevents@2.3.3
+│ │ ├─┬ glob-parent@5.1.2
+│ │ │ └── is-glob@4.0.3 deduped
+│ │ ├─┬ is-binary-path@2.1.0
+│ │ │ └── binary-extensions@2.3.0
+│ │ ├── is-glob@4.0.3 deduped
+│ │ ├── normalize-path@3.0.0 deduped
+│ │ └─┬ readdirp@3.6.0
+│ │   └── picomatch@2.3.1 deduped
+│ ├─┬ debug@4.3.4
+│ │ └── ms@2.1.2
+│ ├── ignore-by-default@1.0.1
+│ ├─┬ minimatch@3.1.2
+│ │ └─┬ brace-expansion@1.1.11
+│ │   ├── balanced-match@1.0.2
+│ │   └── concat-map@0.0.1
+│ ├── pstree.remy@1.1.8
+│ ├── semver@7.6.0 deduped
+│ ├─┬ simple-update-notifier@2.0.0
+│ │ └── semver@7.6.0 deduped
+│ ├─┬ supports-color@5.5.0
+│ │ └── has-flag@3.0.0
+│ ├─┬ touch@3.1.0
+│ │ └─┬ nopt@1.0.10
+│ │   └── abbrev@1.1.1
+│ └── undefsafe@2.0.5
+├─┬ qrcode@1.5.3
+│ ├── dijkstrajs@1.0.3
+│ ├── encode-utf8@1.0.3
+│ ├── pngjs@5.0.0
+│ └─┬ yargs@15.4.1
+│   ├─┬ cliui@6.0.0
+│   │ ├── string-width@4.2.3 deduped
+│   │ ├── strip-ansi@6.0.1
+│   │ └── wrap-ansi@6.2.0
+│   ├── decamelize@1.2.0
+│   ├─┬ find-up@4.1.0
+│   │ ├── locate-path@5.0.0
+│   │ └── path-exists@4.0.0
+│   ├── get-caller-file@2.0.5
+│   ├── require-directory@2.1.1
+│   ├── require-main-filename@2.0.0
+│   ├── set-blocking@2.0.0
+│   ├─┬ string-width@4.2.3
+│   │ ├── emoji-regex@8.0.0
+│   │ ├── is-fullwidth-code-point@3.0.0
+│   │ └── strip-ansi@6.0.1 deduped
+│   ├── which-module@2.0.1
+│   ├── y18n@4.0.3
+│   └─┬ yargs-parser@18.1.3
+│     ├── camelcase@5.3.1
+│     └── decamelize@1.2.0 deduped
+└─┬ stripe@14.25.0
+  ├── @types/node@20.12.7 deduped
+  └── qs@6.13.0 deduped
+

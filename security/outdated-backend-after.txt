@@ -1,0 +1,11 @@
+Package            Current   Wanted  Latest  Location                        Depended by
+@stripe/stripe-js    3.3.0    3.5.0   7.9.0  node_modules/@stripe/stripe-js  Cleansy
+bcryptjs             2.4.3    2.4.3   3.0.2  node_modules/bcryptjs           Cleansy
+dotenv              16.4.5   16.6.1  17.2.2  node_modules/dotenv             Cleansy
+express             4.21.2   4.21.2   5.1.0  node_modules/express            Cleansy
+firebase-admin      12.1.0   12.7.0  13.5.0  node_modules/firebase-admin     Cleansy
+flowbite-react       0.7.8    0.7.8  0.12.9  node_modules/flowbite-react     Cleansy
+nodemailer          6.9.13   6.10.1   7.0.6  node_modules/nodemailer         Cleansy
+nodemon              3.1.0   3.1.10  3.1.10  node_modules/nodemon            Cleansy
+qrcode               1.5.3    1.5.4   1.5.4  node_modules/qrcode             Cleansy
+stripe             14.25.0  14.25.0  18.5.0  node_modules/stripe             Cleansy

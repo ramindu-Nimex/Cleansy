@@ -130,6 +130,12 @@ export const getUserDetails = async (req, res, next) => {
     if (!user) {
       return next(errorHandler(404, "User not found"));
     }
+    // Allow only the owner or admins to view detailed user info
+    const isSelf = req.user?.id === req.params.id;
+    const isAdmin = req.user?.isAdmin || req.user?.isUserAdmin;
+    if (!isSelf && !isAdmin) {
+      return next(errorHandler(403, "You are not allowed to view this user"));
+    }
     const { password: pass, ...rest } = user._doc;
     res.status(200).json(rest);
   } catch (error) {
@@ -138,10 +144,14 @@ export const getUserDetails = async (req, res, next) => {
 };
 
 // Accept Staff
-export const approveAsStaff = async (req, res) => {
+export const approveAsStaff = async (req, res, next) => {
   const _id = req.params.staffID;
 
   try {
+    // Only admins or staff admins can approve staff
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to approve staff"));
+    }
     // Find the Staff Register request by ID and update its status to "accepted" in the database
     const updatedUser = await User.findByIdAndUpdate(
       _id,
@@ -150,9 +160,7 @@ export const approveAsStaff = async (req, res) => {
     );
 
     if (!updatedUser) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Staff not found" });
+      return next(errorHandler(404, "Staff not found"));
     }
 
     // If the request was successfully updated, send a success response
@@ -162,20 +170,20 @@ export const approveAsStaff = async (req, res) => {
       data: updatedUser,
     });
   } catch (error) {
-    // If an error occurs during the update process, send an error response
-    console.error("Error accepting Staff:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while accepting Staff",
-    });
+    // If an error occurs during the update process, send an error to handler
+    next(error);
   }
 };
 
 // Deny Staff
-export const rejectAsStaff = async (req, res) => {
+export const rejectAsStaff = async (req, res, next) => {
   const _id = req.params.staffID;
 
   try {
+    // Only admins or staff admins can reject staff
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to reject staff"));
+    }
     // Find the Staff Register request by ID and update its status to "denied" in the database
     const updatedUser = await User.findByIdAndUpdate(
       _id,
@@ -184,9 +192,7 @@ export const rejectAsStaff = async (req, res) => {
     );
 
     if (!updatedUser) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Staff not found" });
+      return next(errorHandler(404, "Staff not found"));
     }
 
     // If the request was successfully updated, send a success response
@@ -196,11 +202,7 @@ export const rejectAsStaff = async (req, res) => {
       data: updatedUser,
     });
   } catch (error) {
-    // If an error occurs during the update process, send an error response
-    console.error("Error denying Staff:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while denying Staff",
-    });
+    // If an error occurs during the update process, send an error to handler
+    next(error);
   }
 };

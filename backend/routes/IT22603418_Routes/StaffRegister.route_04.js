@@ -14,10 +14,10 @@ router.post("/register", verifyToken, registerStaff);
 //Get All Staff Register
 router.get("/getAll", verifyToken, getAllStaffRegisterRequests);
 
-// Route to accept a leave request
-router.put("/:requestId/approve", acceptStaffRegisterRequest);
+// Route to approve a staff register request (admin/staff-admin only)
+router.put("/:requestId/approve", verifyToken, acceptStaffRegisterRequest);
 
-// Route to deny a leave request
-router.put("/:requestId/reject", denyStaffRegisterRequest);
+// Route to deny a staff register request (admin/staff-admin only)
+router.put("/:requestId/reject", verifyToken, denyStaffRegisterRequest);
 
 export default router;

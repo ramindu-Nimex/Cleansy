@@ -4,8 +4,8 @@ import { verifyToken } from '../../utils/verifyUser.js';
 
 const router = express.Router();
 
-router.post('/create',  createcarparkListing);
-router.put('/updateSlotID',  updatecarparkListing);
+router.post('/create', verifyToken, createcarparkListing);
+router.put('/updateSlotID', verifyToken, updatecarparkListing);
 router.get('/getAllboked',  getAllBooked);
 router.get('/get/:id', getCarparkListings);
 router.get('/getAll', getAllCarparkListings);

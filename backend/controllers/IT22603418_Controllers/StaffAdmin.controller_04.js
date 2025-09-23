@@ -4,6 +4,10 @@ import { errorHandler } from "../../utils/error.js";
 // Controller function to get all leave requests
 export const getAllLeaveRequests = async (req, res, next) => {
   try {
+    // Only admins or staff-admins can view all leave requests
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to view leave requests"));
+    }
     // Fetch all leave requests from the database
     const allLeaveRequests = await RequestLeave.find();
 
@@ -21,10 +25,13 @@ export const getAllLeaveRequests = async (req, res, next) => {
 };
 
 // Accept Leave Request
-export const acceptLeaveRequest = async (req, res) => {
+export const acceptLeaveRequest = async (req, res, next) => {
   const requestId = req.params.requestId;
 
   try {
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to approve leave"));
+    }
     // Find the leave request by ID and update its status to "accepted" in the database
     const updatedRequest = await RequestLeave.findByIdAndUpdate(
       requestId,
@@ -33,9 +40,7 @@ export const acceptLeaveRequest = async (req, res) => {
     );
 
     if (!updatedRequest) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Leave request not found" });
+      return next(errorHandler(404, "Leave request not found"));
     }
 
     // If the request was successfully updated, send a success response
@@ -45,20 +50,18 @@ export const acceptLeaveRequest = async (req, res) => {
       data: updatedRequest,
     });
   } catch (error) {
-    // If an error occurs during the update process, send an error response
-    console.error("Error accepting leave request:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while accepting leave request",
-    });
+    next(error);
   }
 };
 
 // Deny Leave Request
-export const denyLeaveRequest = async (req, res) => {
+export const denyLeaveRequest = async (req, res, next) => {
   const requestId = req.params.requestId;
 
   try {
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to deny leave"));
+    }
     // Find the leave request by ID and update its status to "denied" in the database
     const updatedRequest = await RequestLeave.findByIdAndUpdate(
       requestId,
@@ -67,9 +70,7 @@ export const denyLeaveRequest = async (req, res) => {
     );
 
     if (!updatedRequest) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Leave request not found" });
+      return next(errorHandler(404, "Leave request not found"));
     }
 
     // If the request was successfully updated, send a success response
@@ -79,11 +80,6 @@ export const denyLeaveRequest = async (req, res) => {
       data: updatedRequest,
     });
   } catch (error) {
-    // If an error occurs during the update process, send an error response
-    console.error("Error denying leave request:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while denying leave request",
-    });
+    next(error);
   }
 };

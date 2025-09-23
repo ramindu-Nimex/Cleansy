@@ -19,7 +19,7 @@ router.put("/attendance/:id", verifyToken, updateAttendance);
 router.get("/getAttendance/:staffID", verifyToken, getAllAttendance);
 
 // Route to handle face recognition
-router.post("/recognize-face", recognizeFace);
+router.post("/recognize-face", verifyToken, recognizeFace);
 
 // Route to handle all staff attendance records
 router.get("/getAllStaffAttendance", verifyToken, getAllStaffAttendance);

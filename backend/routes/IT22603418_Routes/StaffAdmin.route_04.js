@@ -11,10 +11,10 @@ const router = express.Router();
 //View All Leave Requests
 router.get("/get_04", verifyToken, getAllLeaveRequests);
 
-// Route to accept a leave request
-router.put("/:requestId/accept", acceptLeaveRequest);
+// Route to accept a leave request (admin/staff-admin only)
+router.put("/:requestId/accept", verifyToken, acceptLeaveRequest);
 
-// Route to deny a leave request
-router.put("/:requestId/deny", denyLeaveRequest);
+// Route to deny a leave request (admin/staff-admin only)
+router.put("/:requestId/deny", verifyToken, denyLeaveRequest);
 
 export default router;

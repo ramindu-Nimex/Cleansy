@@ -1,9 +1,11 @@
 import carparkListing from "../../models/IT22561466_Models/carparkListing.model.js";
+import { errorHandler } from "../../utils/error.js";
 
 export const createcarparkListing = async (req, res, next) => {
-    
     try {
-        const newCarparkListing = await carparkListing.create(req.body);
+        // Ensure the authenticated user is recorded as the owner
+        const payload = { ...req.body, userRef: req.user.id };
+        const newCarparkListing = await carparkListing.create(payload);
 
         const savedCarparkListingId = newCarparkListing._id;
 
@@ -38,6 +40,11 @@ export const updatecarparkListing = async (req, res, next) => {
                 success: false,
                 message: "Carpark Listing not found.",
             });
+        }
+
+        // Only the owner can update their listing
+        if (existingCarparkListing.userRef?.toString() !== req.user.id) {
+            return next(errorHandler(403, "You are not allowed to update this listing"));
         }
 
         existingCarparkListing.slotId = slotId;

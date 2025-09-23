@@ -3,7 +3,8 @@ import { errorHandler } from "../../utils/error.js";
 
 export const createvisitorListing = async (req, res, next) => {
   try {
-    const newVisitorListing = await visitorListing.create(req.body);
+    const payload = { ...req.body, userRef: req.user.id };
+    const newVisitorListing = await visitorListing.create(payload);
     return res.status(201).json({
       success: true,
       message: "Visitor listing created successfully",
@@ -100,4 +101,3 @@ export const getvisitors = async (req, res, next) => {
         next(error);
     }
 };
-

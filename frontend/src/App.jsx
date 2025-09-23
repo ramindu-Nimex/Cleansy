@@ -16,6 +16,7 @@ import DashMaintenance from "./components/IT22607232_Components/DashMaintenance"
 import TaskAssign from "./pages/IT22607232_Pages/s1_TaskAssignCreation";
 import RequestLeave_04 from "./pages/IT22603418_Pages/RequestLeave_04";
 import OnlyPropertyAdminPrivateRoute_02 from "./components/IT22577160_Components/OnlyPropertyAdminPrivateRoute_02";
+import RoleRoute from "./components/RoleRoute";
 import CreateSharedResources_02 from "./pages/IT22577160_Pages/CreateSharedResources_02";
 import UpdateSharedResources_02 from "./pages/IT22577160_Pages/UpdateSharedResources_02";
 import Updatepaymentpage_03 from "./pages/IT22602978_Pages/Updatepaymentpage_03";
@@ -218,11 +219,13 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             {/* <Route path='/create_04' element={<RequestLeave_04/>}/>
               <Route path='/delete_04' element={<RequestDetails_04/>}/> */}
-            <Route path="/AdminFinal" element={<FinalAdminPayments_03 />} />
-            <Route
-              path="/update-paymentprofile/:data"
-              element={<Updatepaymentpage_03 />}
-            />
+            <Route element={<RoleRoute anyOf={["isBillingAdmin","isAdmin"]} />}>
+              <Route path="/AdminFinal" element={<FinalAdminPayments_03 />} />
+              <Route
+                path="/update-paymentprofile/:data"
+                element={<Updatepaymentpage_03 />}
+              />
+            </Route>
                  <Route path="/task-tracker" element={<TaskTracker_01/>} />
                 <Route path="/task-estimate" element={<WorkEstimation_01/>} />
               <Route exact path="/create-announcement" element={<CreateAnnouncementForm/>}/>
@@ -235,11 +238,13 @@ function App() {
               <Route path="/estimation" element={<EstimationOne_01/>} />
               <Route path="/get-estimation/:taskid" element={<WorkEstimate_01/>} />
 
-            <Route path="/admin-page" element={<VisitorAdminPage />} />
+            <Route element={<RoleRoute anyOf={["isVisitorAdmin","isAdmin"]} />}>
+              <Route path="/admin-page" element={<VisitorAdminPage />} />
+              <Route path="/carpark-admin-page" element={<CarParkAdminPage/>}/>
+            </Route>
             <Route path="/searchVisitor" element={<VisitorAdminPage />} />
             <Route path="/park-slot/:slotID" element={<Parkingslot />} />
             <Route path="/park-slot-order/:carparkListingId" element={<ParkingslotOrder />} />
-            <Route path="/carpark-admin-page" element={<CarParkAdminPage/>}/>
             
           </Routes>
         </div>

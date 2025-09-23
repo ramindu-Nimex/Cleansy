@@ -1,5 +1,6 @@
 import StaffRegister from "../../models/IT22603418_Models/StaffRegister.model_04.js";
 import User from "../../models/user.model.js";
+import { errorHandler } from "../../utils/error.js";
 
 // Controller to handle staff registration
 export const registerStaff = async (req, res, next) => {
@@ -56,6 +57,10 @@ export const registerStaff = async (req, res, next) => {
 // Controller function to get all Staff Register requests
 export const getAllStaffRegisterRequests = async (req, res, next) => {
   try {
+    // Only admins or staff-admins can view all staff register requests
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to view staff register requests"));
+    }
     // Fetch all Staff Register requests from the database
     const AllStaffRegisterRequests = await StaffRegister.find();
 
@@ -73,10 +78,13 @@ export const getAllStaffRegisterRequests = async (req, res, next) => {
 };
 
 // Accept Staff Register Request
-export const acceptStaffRegisterRequest = async (req, res) => {
+export const acceptStaffRegisterRequest = async (req, res, next) => {
   const requestId = req.params.requestId;
 
   try {
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to approve staff registration"));
+    }
     // Find the Staff Register request by ID and update its status to "accepted" in the database
     const updatedStaffRegisterRequest = await StaffRegister.findOneAndUpdate(
       { staffID: requestId },
@@ -85,9 +93,7 @@ export const acceptStaffRegisterRequest = async (req, res) => {
     );
 
     if (!updatedStaffRegisterRequest) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Staff Register request not found" });
+      return next(errorHandler(404, "Staff Register request not found"));
     }
 
     // If the request was successfully updated, send a success response
@@ -97,19 +103,17 @@ export const acceptStaffRegisterRequest = async (req, res) => {
       data: updatedStaffRegisterRequest,
     });
   } catch (error) {
-    // If an error occurs during the update process, send an error response
-    console.error("Error accepting Staff Register request:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while accepting Staff Register request",
-    });
+    next(error);
   }
 };
 
 // Deny Staff Register Request
-export const denyStaffRegisterRequest = async (req, res) => {
+export const denyStaffRegisterRequest = async (req, res, next) => {
   const requestId = req.params.requestId;
   try {
+    if (!req.user?.isAdmin && !req.user?.isStaffAdmin) {
+      return next(errorHandler(403, "You are not allowed to deny staff registration"));
+    }
     // Find the Staff Register request by ID and update its status to "denied" in the database
     const updatedStaffRegisterRequest = await StaffRegister.findOneAndUpdate(
       { staffID: requestId },
@@ -118,9 +122,7 @@ export const denyStaffRegisterRequest = async (req, res) => {
     );
 
     if (!updatedStaffRegisterRequest) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Staff Register request not found" });
+      return next(errorHandler(404, "Staff Register request not found"));
     }
 
     // If the request was successfully updated, send a success response
@@ -130,11 +132,6 @@ export const denyStaffRegisterRequest = async (req, res) => {
       data: updatedStaffRegisterRequest,
     });
   } catch (error) {
-    // If an error occurs during the update process, send an error response
-    console.error("Error denying Staff Register request:", error);
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while denying Staff Register request",
-    });
+    next(error);
   }
 };

@@ -31,18 +31,55 @@ import EstimationRoutes_01 from './routes/IT22607232_Routes/EstimationRoutes_01.
 import carparkListingRoutes from './routes/IT22561466_Routes/carparkListing.route.js';
 
 import StaffRegisterRoutes from "./routes/IT22603418_Routes/StaffRegister.route_04.js";
+import csurf from 'csurf';
+import fs from "fs";
+import https from "https";
+import helmet from "helmet";
 dotenv.config();
 
 const app = express();
+// Enable CSRF protection
+const csrfProtection = csurf({
+  cookie: true, // store CSRF token in a cookie
+});
+
+//  Disable X-Powered-By Header
+app.disable("x-powered-by");
+
+//  Use Helmet for secure HTTP headers
+app.use(helmet());
+
+
 app.use(express.json());
 app.use(cookieParser());
 // Use the cors middleware
-app.use(cors());
+// Configure CORS properly (only allow your frontend origin)
+app.use(
+  cors({
+    origin: "https://localhost:5173", // replace with your frontend URL
+    credentials: true, // allow cookies
+  })
+);
+app.use(csrfProtection);
+
+app.get("/api/csrf-token", (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
 
 dbConnection();
 
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+// Create HTTPS server
+const httpsServer = https.createServer(
+  {
+    key: fs.readFileSync("./backend/localhost-key.pem"),
+    cert: fs.readFileSync("./backend/localhost.pem"),
+
+  },
+  app
+);
+
+httpsServer.listen(3000, () => {
+  console.log("Server is running on https://localhost:3000");
 });
 
 app.use("/api/user", userRoutes);
@@ -65,9 +102,9 @@ app.use("/api/serviceBooking", serviceBookingRoutes);
 app.use("/api/taskAssign", TaskAssignRoute);
 app.use("/api/taskRating", RateTasksRoutes);
 app.use("/api/taskAnalysis", TaskAnalysisRoute);
-app.use("/api/categeories",taskcategoriesRoutes);
-app.use("/api/labels",tasklabelsRoutes);
-app.use("/api/workEstimation",EstimationRoutes_01)
+app.use("/api/categeories", taskcategoriesRoutes);
+app.use("/api/labels", tasklabelsRoutes);
+app.use("/api/workEstimation", EstimationRoutes_01)
 
 // IT22577160 Routes
 app.use("/api/apartmentListing", apartmentListingRoutes);

@@ -78,10 +78,10 @@ const CreateSharedResources_02 = () => {
       e.preventDefault();
       try {
          if(+formData.regularPrice < +formData.discountPrice) return setError('Discount price must be lower than regular price')
-         if(!file) {
-            setImageUploadError('Please select an image');
-            return;
-         }
+         // if(!file) {
+         //    setImageUploadError('Please select an image');
+         //    return;
+         // }
          const res = await fetch('/api/sharedResourcesListing/create', {
             method: 'POST',
             headers: {

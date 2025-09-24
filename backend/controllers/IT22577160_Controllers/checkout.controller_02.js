@@ -16,7 +16,7 @@ export const checkout = async (req, res, next) => {
                   currency: 'usd',
                   product_data: {
                      name: product.title,
-                     images: [product.image],
+                     // images: [product.image],
                   },
                   unit_amount: (product.regularPrice - product.discountPrice) * 100,
                },

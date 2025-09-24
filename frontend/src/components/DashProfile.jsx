@@ -185,7 +185,7 @@ useEffect(() => {
     <div className="max-w-lg mx-auto p-3 w-full">
       <h1 className='text-center my-7 font-extrabold text-3xl underline'>Profile</h1>
 
-       
+    //Previous Version
       {/* <div className="max-w-lg mx-auto p-3 w-full border-2 border-red-500 mb-5">
         <h2 className='text-xl font-bold mb-2'>User Profile (Vulnerable)</h2>
         <div

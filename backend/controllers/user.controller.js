@@ -1,6 +1,20 @@
 import bcryptjs from "bcryptjs";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
+import { getLogger } from "../utils/logHandler/contextLogger.js";
+
+const COOKIE_SAMESITE = (process.env.COOKIE_SAMESITE || 'lax').toLowerCase();
+const COOKIE_SECURE = process.env.NODE_ENV !== 'development';
+const COOKIE_MAX_AGE_MS = parseInt(process.env.JWT_MAX_AGE_MS || '7200000', 10);
+function cookieOptions() {
+  return {
+    httpOnly: true,
+    secure: COOKIE_SECURE,
+    sameSite: COOKIE_SAMESITE === 'none' ? 'none' : COOKIE_SAMESITE,
+    maxAge: COOKIE_MAX_AGE_MS,
+    path: '/'
+  };
+}
 
 export const test = (req, res) => {
   res.send("Test API");
@@ -75,11 +89,14 @@ export const deleteUser = async (req, res, next) => {
 // signout user API
 export const signout = (req, res, next) => {
   try {
+    const log = getLogger({ route: 'auth.signout' });
     res
-      .clearCookie("access_token")
+      .clearCookie("access_token", cookieOptions())
       .status(200)
       .json("User has been signed out");
+    log.info({ userId: req.user?.id }, 'signout success');
   } catch (error) {
+    getLogger({ route: 'auth.signout' }).error({ err: error }, 'signout error');
     next(error);
   }
 };
@@ -163,7 +180,7 @@ export const approveAsStaff = async (req, res) => {
     });
   } catch (error) {
     // If an error occurs during the update process, send an error response
-    console.error("Error accepting Staff:", error);
+    getLogger({ route: 'staff.approve' }).error({ err: error }, 'Error accepting Staff');
     res.status(500).json({
       success: false,
       message: "An error occurred while accepting Staff",
@@ -197,7 +214,7 @@ export const rejectAsStaff = async (req, res) => {
     });
   } catch (error) {
     // If an error occurs during the update process, send an error response
-    console.error("Error denying Staff:", error);
+    getLogger({ route: 'staff.reject' }).error({ err: error }, 'Error denying Staff');
     res.status(500).json({
       success: false,
       message: "An error occurred while denying Staff",

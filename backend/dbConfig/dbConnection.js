@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
+import { getLogger } from "../utils/logHandler/contextLogger.js";
 
 const dbConnection = async () => {
-   try {
-      const dbConnection = await mongoose.connect(process.env.MONGO_DB_URL).then(() => {
-         console.log('DB Connected Successfully');
-      })
-   } catch (error) {
-      console.log("DB Error: " + error);
-   }
+  const log = getLogger({ component: 'db' });
+  try {
+    await mongoose.connect(process.env.MONGO_DB_URL);
+    log.info('DB connected successfully');
+  } catch (error) {
+    log.error({ err: error }, 'DB connection error');
+  }
 }
 
 export default dbConnection;

@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
@@ -75,10 +76,13 @@ import Parkingslot from "./pages/IT22561466_Pages/Parkingslot";
 import ParkingslotOrder from "./pages/IT22561466_Pages/ParkingslotOrder";
 import ServiceBookingUpdate_06 from "./pages/IT22350114_Pages/ServiceBookingUpdate_96";
 import CarParkAdminPage from "./pages/IT22561466_Pages/CarParkAdminPage";
-
+import { initCSRF } from "./api";
 
 
 function App() {
+    useEffect(() => {
+    initCSRF(); // load CSRF token from backend
+  }, []);
   return (
     <>
       <Router>

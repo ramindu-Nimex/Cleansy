@@ -15,17 +15,32 @@ const Header = () => {
     const {currentUser} = useSelector(state => state.user)
     const {theme} = useSelector(state => state.theme)
     const [searchTerm, setSearchTerm] = useState('');
+    
+const getCsrfToken = async () => {
+  const res = await fetch('/api/csrf-token', {
+    credentials: 'include', // important for cookies
+  });
+  const data = await res.json();
+  return data.csrfToken;
+};
+
 
    const handleSignout = async () => {
       try {
+      const csrfToken = await getCsrfToken();
         const res = await fetch('/api/user/signout', {
-          method: 'POST'
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+        'CSRF-Token': csrfToken, // this header is required by csurf
+      },
         })
         const data = await res.json()
         if(!res.ok) {
           console.log(data.message);
         } else {
           dispatch(signOutSuccess())
+          navigate('/sign-in');
         }
       } catch (error) {
         console.log(error.message);

@@ -1,6 +1,8 @@
 import bcryptjs from "bcryptjs";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
+import sanitizeHtml from "sanitize-html";
+import validator from "validator";
 
 export const test = (req, res) => {
   res.send("Test API");
@@ -20,6 +22,11 @@ export const updateUser = async (req, res, next) => {
   }
 
   if (req.body.username) {
+    const cleanUsername = sanitizeHtml(req.body.username, {
+      allowedTags: [],
+      allowedAttributes: {}
+    });
+    req.body.username = cleanUsername;
     if (req.body.username.length < 7 || req.body.username.length > 20) {
       return next(
         errorHandler(400, "Username must be between 7 to 20 characters")
@@ -31,10 +38,15 @@ export const updateUser = async (req, res, next) => {
     if (req.body.username !== req.body.username.toLowerCase()) {
       return next(errorHandler(400, "Username must be in lowercase"));
     }
-    if (!req.body.username.match(/^[a-zA-Z0-9]+$/)) {
-      return next(
-        errorHandler(400, "Username must contain only letters and numbers")
-      );
+    if (!/^[a-zA-Z0-9]+$/.test(req.body.username)) {
+      return next(errorHandler(400, "Username must contain only letters and numbers"));
+    }
+  }
+
+  // Profile picture URL validation
+  if (req.body.profilePicture) {
+    if (!validator.isURL(req.body.profilePicture, { protocols: ["http", "https"], require_protocol: true })) {
+      return next(errorHandler(400, "Profile picture URL must be a valid http/https URL"));
     }
   }
 

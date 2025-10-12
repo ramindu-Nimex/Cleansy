@@ -31,9 +31,19 @@ import EstimationRoutes_01 from './routes/IT22607232_Routes/EstimationRoutes_01.
 import carparkListingRoutes from './routes/IT22561466_Routes/carparkListing.route.js';
 
 import StaffRegisterRoutes from "./routes/IT22603418_Routes/StaffRegister.route_04.js";
+
+import helmet from "helmet";
+
 dotenv.config();
 
 const app = express();
+
+//  Disable X-Powered-By Header
+app.disable("x-powered-by");
+
+//  Use Helmet for secure HTTP headers
+app.use(helmet());
+
 app.use(express.json());
 app.use(cookieParser());
 // Use the cors middleware

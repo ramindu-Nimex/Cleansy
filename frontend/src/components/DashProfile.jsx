@@ -11,6 +11,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FcHome } from 'react-icons/fc'
 import { GrResources } from "react-icons/gr";
 import {Link} from 'react-router-dom'
+import DOMPurify from 'dompurify' // Added for XSS sanitization
 
 const DashProfile = () => {
   const {currentUser, error, loading} = useSelector(state => state.user)
@@ -62,8 +63,9 @@ const DashProfile = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageFileUrl(downloadURL)
-          setFormData({...formData, profilePicture: downloadURL})
+          const safeUrl = DOMPurify.sanitize(downloadURL) // sanitize uploaded URL
+          setImageFileUrl(safeUrl)
+          setFormData({...formData, profilePicture: safeUrl})
           setImageFileUploading(false)
         })
       }
@@ -146,6 +148,19 @@ const DashProfile = () => {
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
       <h1 className='text-center my-7 font-extrabold text-3xl underline'>Profile</h1>
+      {/* previous version  */}
+      {/* <div className="max-w-lg mx-auto p-3 w-full border-2 border-red-500 mb-5">
+        <h2 className='text-xl font-bold mb-2'>User Profile (Vulnerable)</h2>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <p>Username: ${(currentUser.username)}</p>
+              ${(currentUser.profilePicture)}
+            `
+          }}
+        />
+        <p className="text-red-600 mt-2">This section is vulnerable to DOM XSS!</p>
+      </div> */}
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden/>
         <div className="relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full" onClick={() => filePickerRef.current.click()}>
@@ -166,7 +181,7 @@ const DashProfile = () => {
                   }}/>
                )
             }
-          <img src={imageFileUrl || currentUser.profilePicture} alt="user" className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadedProgress && imageFileUploadedProgress < 100 && 'opacity-60'}`} />
+          <img src={DOMPurify.sanitize(imageFileUrl || currentUser.profilePicture)} alt="user" className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${imageFileUploadedProgress && imageFileUploadedProgress < 100 && 'opacity-60'}`} />
         </div>
         {
           imageFileUploadError && <Alert className="mt-7 py-3 bg-gradient-to-r from-red-100 via-red-300 to-red-400 shadow-shadowOne text-center text-red-600 text-base tracking-wide animate-bounce">{imageFileUploadError}</Alert>
@@ -177,6 +192,7 @@ const DashProfile = () => {
         <Button type='submit' gradientDuoTone='purpleToBlue' className="uppercase" disabled={loading || imageFileUploading}>
           {loading ? <><Spinner size='sm'/><span className="pl-3">Loading...</span></> : 'Update'}
         </Button>
+        
       </form>
       {
         !currentUser.isAdmin && (

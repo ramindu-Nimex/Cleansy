@@ -34,6 +34,32 @@ export const signup = async (req, res, next) => {
   }
 };
 
+// sign up API - Vulnerable Version
+export const signupVulnerable = async (req, res, next) => {
+  const { username, email, password, profilePicture } = req.body;
+
+  if (!username || !email || !password) {
+    return next(errorHandler(400, "All fields are required"));
+  }
+
+  const hashedPassword = bcryptjs.hashSync(password, 10);
+
+  //  Vulnerable: profilePicture stored without validation
+  const newUser = new User({
+    username,
+    email,
+    password: hashedPassword,
+    profilePicture,
+  });
+
+  try {
+    await newUser.save();
+    res.json("User Signup successfully");
+  } catch (error) {
+    next(error);
+  }
+};
+
 // sign in API
 export const signIn = async (req, res, next) => {
   const { email, password } = req.body;
@@ -116,6 +142,21 @@ export const google = async (req, res, next) => {
    }
 }
 
+// A vulnerable version of the google sign-in function
+export const googleVuln = async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    //  Unsafe: directly using user input in MongoDB query
+    const user = await User.findOne({ email, profilePicture: req.body.googlePhotoURL });
+    if (user) {
+      res.json({ success: true, message: "Logged in!" });
+    } else {
+      res.json({ success: false, message: "User not found" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const signInQR = async (req, res, next) => {
    const { email } = req.body;

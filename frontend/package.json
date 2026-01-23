@@ -24,7 +24,7 @@
     "face-api.js": "^0.22.2",
     "file-saver": "^2.0.5",
     "firebase": "^10.11.1",
-    "flowbite-react": "^0.7.2",
+    "flowbite-react": "^0.7.3",
     "html2canvas": "^1.4.1",
     "html5-qrcode": "^2.3.8",
     "jspdf": "^2.5.1",

@@ -17,7 +17,7 @@
     "@reduxjs/toolkit": "^2.1.0",
     "@stripe/stripe-js": "^3.3.0",
     "antd": "^5.17.0",
-    "axios": "^1.6.8",
+    "axios": "^1.13.5",
     "boxicons": "^2.1.4",
     "chart.js": "^4.4.2",
     "emailjs-com": "^3.2.0",
